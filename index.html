@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Comptatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Really basic Marionette app</title>
+	<meta name="description" content="Totally basic Marionette app">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div id="titleRegion">
+	</div>
+
+	<!-- templates here -->
+	<script type="text/template" id="currentTitleTemplate">
+		<%= title %>
+	</script>
+
+	<script type="text/template" id="formerTitlesTemplate">
+		<%= title %>
+	</script>
+
+	<script type="text/template" id="titlesCompositeTemplate">
+		<ul></ul>
+	</script>
+
+	<script type="text/template" id="titlesLayout">
+		
+		<header id="currentTitle"></header>
+
+		<p><input type="text" name="newTitle" id="newTitle" /></p>
+
+		<p><a href="#" id="updateTitle">Click to update title</a></p>
+
+		<h2>Previous titles include:</h2>
+
+		<section id="formerTitles"></section>
+		
+	</script>
+
+	
+	<script type="text/javascript" src="js/libs/jquery.min.js"></script>
+	<script type="text/javascript" src="js/libs/underscore.js"></script>
+	<script type="text/javascript" src="js/libs/backbone.js"></script>
+	<script type="text/javascript" src="js/libs/backbone.marionette.js"></script>
+
+	<script type="text/javascript" src="js/Titles.js"></script>
+
+</body>
+</html>
