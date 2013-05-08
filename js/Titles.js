@@ -77,12 +77,21 @@ Titles.TitlesLayout = Backbone.Marionette.Layout.extend({
 	},
 
 	events: {
-		'blur #newTitle': 'updateTitle'
+		'keypress #newTitle': 'checkEnterKey'
 	},
 
 	updateTitle: function(ev){
-		Titles.App.vent.trigger('titles:updated', 
-			new Titles.FormerTitle({title: ev.currentTarget.value}));
+		if (ev.currentTarget.value === '') return;
+
+		var newTitle = new Titles.FormerTitle({title: ev.currentTarget.value});
+		ev.currentTarget.value = '';
+
+		Titles.App.vent.trigger('titles:updated', newTitle);
+	},
+
+	checkEnterKey: function(ev){
+ 		if (ev.keyCode != 13) return;
+       	this.updateTitle(ev);
 	}
 });
 
