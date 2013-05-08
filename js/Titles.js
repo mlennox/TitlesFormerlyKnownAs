@@ -20,7 +20,7 @@ Titles.FormerTitle = Backbone.Model.extend({});
 Titles.FormerTitlesList = Backbone.Collection.extend({
 	model: Titles.FormerTitle,
 	initialize: function(){
-		this.on
+		//this.on
 	}
 });
 
@@ -31,10 +31,9 @@ Titles.CurrentTitleView = Backbone.Marionette.ItemView.extend({
 	tagName: 'h1',
 
 	initialize: function(){
-		
-
 		var self = this;
-		Titles.App.vent.on('titles:updated', function(newTitle){
+
+		this.listenTo(Titles.App.vent, 'titles:updated', function(newTitle){
 			self.model.set('title', newTitle.get('title'));
 		});
 
@@ -57,9 +56,14 @@ Titles.FormerTitleComposite = Backbone.Marionette.CompositeView.extend({
 
 	initialize: function(){
 		var self = this;
-		this.listenTo(this.collection, "add", function(updatedTitle){
-			Titles.App.vent.trigger('titles:updated', updatedTitle);
+
+		this.listenTo(Titles.App.vent, 'titles:updated', function(newTitle){
+			self.collection.add(newTitle);
 		});
+	},
+
+	updateTitle: function(el){
+		var thing = true;
 	}
 });
 
@@ -68,6 +72,15 @@ Titles.TitlesLayout = Backbone.Marionette.Layout.extend({
 	regions: {
 		header: '#currentTitle', // can I just use a selector?
 		formerTitles: '#formerTitles'
+	},
+
+	events: {
+		'blur #newTitle': 'updateTitle'
+	},
+
+	updateTitle: function(ev){
+		Titles.App.vent.trigger('titles:updated', 
+			new Titles.FormerTitle({title: ev.currentTarget.value}));
 	}
 });
 
