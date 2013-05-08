@@ -1,12 +1,5 @@
 'use strict';
 
-// the collection will hold all the previous titles
-// the most recent addition is the current title and as such won't be shown in the list
-// the most recent title will be shown as the title of the page
-// we'll be using Backbone model, inside a Marionette collection
-// the displayed list will use a Marionette ItemView
-// and the title will be updated through the use of a Marionette CompositeView
-
 var Titles = window.Titles || {};
 
 Titles.App = new Backbone.Marionette.Application();
@@ -78,8 +71,9 @@ Titles.FormerTitleComposite = Backbone.Marionette.CompositeView.extend({
 Titles.TitlesLayout = Backbone.Marionette.Layout.extend({
 	template: '#titlesLayout',
 	regions: {
-		header: '#currentTitle', // can I just use a selector?
-		formerTitles: '#formerTitles'
+		// need to investigate if these selectors are scoped to the template...
+		header: 'header',
+		formerTitles: 'section'
 	},
 
 	events: {
