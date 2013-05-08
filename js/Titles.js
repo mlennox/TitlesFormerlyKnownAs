@@ -19,8 +19,11 @@ Titles.FormerTitle = Backbone.Model.extend({});
 
 Titles.FormerTitlesList = Backbone.Collection.extend({
 	model: Titles.FormerTitle,
+
 	initialize: function(){
-		//this.on
+		this.listenTo(this, 'add', function(newTitle){
+			Titles.App.vent.trigger('titles:updated', newTitle);
+		});
 	}
 });
 
@@ -60,10 +63,15 @@ Titles.FormerTitleComposite = Backbone.Marionette.CompositeView.extend({
 		this.listenTo(Titles.App.vent, 'titles:updated', function(newTitle){
 			self.collection.add(newTitle);
 		});
-	},
-
-	updateTitle: function(el){
-		var thing = true;
+	}, 
+	elPreviousTitle: null,  // ugh-lee, but it works
+	appendHtml: function(collectionView, itemView){
+		// prepend everything in the collection apart from the latest title
+		//if (this.collection.indexOf(itemView.model) != this.collection.length){
+		if (this.previousTitle !== null) {
+			collectionView.$el.prepend(this.previousTitle);	
+		}
+		this.previousTitle = itemView.el;
 	}
 });
 
