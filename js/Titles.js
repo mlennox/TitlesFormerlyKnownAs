@@ -77,21 +77,20 @@ Titles.TitlesLayout = Backbone.Marionette.Layout.extend({
 	},
 
 	events: {
-		'keypress #newTitle': 'checkEnterKey'
+		'submit form': 'updateTitle'
 	},
 
 	updateTitle: function(ev){
-		if (ev.currentTarget.value === '') return;
+		var elInput = $('input', ev.currentTarget);
 
-		var newTitle = new Titles.FormerTitle({title: ev.currentTarget.value});
-		ev.currentTarget.value = '';
+		if (elInput.val() === '') return;
+
+		var newTitle = new Titles.FormerTitle({title: elInput.val()});
+		elInput.val('');
 
 		Titles.App.vent.trigger('titles:updated', newTitle);
-	},
 
-	checkEnterKey: function(ev){
- 		if (ev.keyCode != 13) return;
-       	this.updateTitle(ev);
+		ev.preventDefault();
 	}
 });
 
