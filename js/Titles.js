@@ -1,5 +1,11 @@
 'use strict';
 
+// TODO! (no backbone app would be complete without one :)
+// use local/remote storage
+// try it on a mobile device
+// use marionette's AMD pattern to split this into separate files
+// compile the templates/views
+
 var Titles = window.Titles || {};
 
 Titles.App = new Backbone.Marionette.Application();
