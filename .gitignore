@@ -1,0 +1,4 @@
+# ignore any IntelliJIdea files
+*.iml
+.idea
+.idea/*.*
