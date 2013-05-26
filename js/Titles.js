@@ -33,15 +33,14 @@ Titles.CurrentTitleView = Backbone.Marionette.ItemView.extend({
 	tagName: 'h1',
 
 	initialize: function(){
-		var self = this;
 
-		this.listenTo(Titles.App.vent, 'titles:updated', function(newTitle){
-			self.model.set('title', newTitle.get('title'));
-		});
+		this.listenTo(Titles.App.vent, 'titles:updated', this.setCurrentTitle);
 
-		this.listenTo(this.model, 'change', function(){
-			self.render()
-		});
+		this.listenTo(this.model, 'change', this.render);
+	},
+
+	setCurrentTitle: function(newTitle){
+		this.model.set('title', newTitle.get('title'));
 	}
 });
 
@@ -59,11 +58,15 @@ Titles.FormerTitleComposite = Backbone.Marionette.CompositeView.extend({
 	initialize: function(){
 		var self = this;
 
-		this.listenTo(Titles.App.vent, 'titles:updated', function(newTitle){
-			self.collection.add(newTitle);
-		});
+		this.listenTo(Titles.App.vent, 'titles:updated', this.addTitleToCollection);
 	}, 
+
 	elPreviousTitle: null,  // ugh-lee, but it works
+
+	addTitleToCollection: function(newTitle){
+		this.collection.add(newTitle);
+	},
+
 	appendHtml: function(collectionView, itemView){
 		// prepend everything in the collection apart from the latest title
 		//if (this.collection.indexOf(itemView.model) != this.collection.length){
