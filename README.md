@@ -11,10 +11,14 @@ It's my first Marionette (backbone) app. I have plenty of to-do apps, but no tit
 
 ## TODO's
 
-* use local/remote storage
+* use local storage
+* use remote storage
 * try it on a mobile device
-* ~~use marionette's AMD pattern to split this into separate files~~ done
 * compile the templates/views
 * tests, damnit!
-* code coverage?
+  * Jasmine
+  * Karma
+  * PhantomJS
+  * code coverage?
+* ~~use marionette's AMD pattern to split this into separate files~~
 
