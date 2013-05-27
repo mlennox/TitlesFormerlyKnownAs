@@ -13,7 +13,7 @@ It's my first Marionette (backbone) app. I have plenty of to-do apps, but no tit
 
 * use local/remote storage
 * try it on a mobile device
-* use marionette's AMD pattern to split this into separate files
+* ~~use marionette's AMD pattern to split this into separate files~~ done
 * compile the templates/views
 * tests, damnit!
 * code coverage?
